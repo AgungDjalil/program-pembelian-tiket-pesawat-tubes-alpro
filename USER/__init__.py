@@ -1,0 +1,1 @@
+from .view import kota, buat_data, loading
