@@ -8,7 +8,7 @@ from . import inputan
 def read(kota):
 
     try:
-        with open(f'/home/agung/Documents/alpro/program tiket pesawat /jadwal/{kota}.csv', 'r') as file:
+        with open(f'/home/agung/Documents/tugas kuliah/alpro/program tiket pesawat /jadwal/{kota}.csv', 'r') as file:
             content = file.readlines()
             jumlah_buku = len(content)
             return content
@@ -20,7 +20,7 @@ def read(kota):
 def read_plane(**kwargs):
 
     try:
-        with open(f'/home/agung/Documents/alpro/program tiket pesawat /jadwal/{kota}.csv', 'r') as file:
+        with open(f'/home/agung/Documents/tugas kuliah/alpro/program tiket pesawat /jadwal/{kota}.csv', 'r') as file:
             content = file.readlines()
             jumlah_data = len(content)
             if "no_pesawat" in kwargs:

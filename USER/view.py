@@ -110,9 +110,9 @@ def flight_detail(maskapai, dari, ke, tanggal, bulan, tahun, nama_pemesan, nomor
     print("\nPASSENGER DETAILS")
     dataTraveller(data_utuh)
     print("\nPRICE DETAILS")
-    print("◾ Price You Pay         : Rp", total_harga)
-    print("◾ Total Original Price  : Rp ", original)
-    print("◾ Insurance             : Rp ", insurance)
+    print(f"◾ Price You Pay         : Rp{total_harga:,.2f}")
+    print(f"◾ Total Original Price  : Rp{original:,.2f}")
+    print(f"◾ Insurance             : Rp{insurance:,.2f}")
     print("")
     print("We will send your booking confirmations to the above contact details,\nwhich will also be used for refund or reschedule purposes.")
 

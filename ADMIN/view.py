@@ -1,7 +1,35 @@
+from . import operasi
+
+
+def read_console(pilih):
+    pilih.lower()
+    pilihan = "".join(["data", pilih])
+   
+    data_file = operasi.read(pilihan)
+
+    if pilih == "pemesan":
+        pemesan_data(data_file)
+    elif pilih == "penumpang":
+        penumpang_data(data_file)  
+
+
+def search_console(pilih):
+    pilih.lower()
+    pilihan = "".join(["data", pilih])
+    print("")
+
+    while(True):
+        operasi.loading()
+        no_pk = str(input("Masukkan PK\t: "))
+            
+        data_pemesan = operasi.search(no_pk, pilihan)
+        print(data_pemesan)
+        x = input((' '))
 
 
 def pemesan_data(data_file):
     ## header
+    no = "NO"
     tanggal = "TANGGAL"
     nama = "NAMA"
     nomor = "NOMOR TELP"
@@ -9,7 +37,7 @@ def pemesan_data(data_file):
     tagihan = "TAGIHAN"
 
     print("="*56)
-    print(f"{tanggal:15} | {nama:20} | {nomor:10} | {tagihan:10}")
+    print(f"{no:3} | {tanggal:15} | {nama:20} | {nomor:10} | {tagihan:,}")
     print("-"*56)
 
     ## content
@@ -22,7 +50,7 @@ def pemesan_data(data_file):
         email = data_break[2]
         maskapai = data_break[5]
         tagihan = data_break[6]
-        print(f"{index+1:3} | {tanggal:.15} | {nama:.20} | {nomor:.10} | {tagihan:.10}\n")
+        print(f"{index+1:3} | {tanggal:.15} | {nama:.20} | {nomor:.10} | {tagihan:,}\n")
 
     ## footer
     print("="*56)
@@ -53,3 +81,4 @@ def penumpang_data(data_file):
 
         ## Footer
         print("="*56)
+

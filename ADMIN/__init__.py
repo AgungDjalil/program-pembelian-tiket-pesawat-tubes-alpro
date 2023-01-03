@@ -1,1 +1,1 @@
-from .menu import read_console, view_menu, search_console
+from .menu import menu, opsi_n_DB

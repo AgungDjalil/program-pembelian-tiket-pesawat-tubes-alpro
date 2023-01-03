@@ -8,24 +8,20 @@ if __name__ == "__main__":
     x = input(" ")
 
     if x == "admin":
-        USER.loading()
         while(True):
-            
-            ADMIN.view_menu()
+            USER.loading()
+        
+            ADMIN.menu()
 
             user_option = input("Masukan opsi: ")
-            
-            if user_option == "1":
-                pilih = input("Baca Database Pemesan/Penumpang: ")
-                ADMIN.read_console(pilih)
-            elif user_option == "2":
-                pilih = input("Search Database Pemesan/Penumpang: ")
-                ADMIN.search_console(pilih)
 
+            ADMIN.opsi_n_DB(user_option)            
 
             is_done = input("\nApakah Selesai (y/n)? ")
             if is_done == "y" or is_done == "Y":
                 break
+        
+
     else:
         while True:
             USER.loading()
