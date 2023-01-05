@@ -24,6 +24,7 @@ def opsi_n_DB(user_option):
         view.update_console(pilih)
     elif user_option == "4":
         pilih = input("Search Database Pemesan/Penumpang\t: ")
+        view.delete_console(pilih)
 
  
 

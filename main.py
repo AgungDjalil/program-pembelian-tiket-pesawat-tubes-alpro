@@ -8,9 +8,9 @@ if __name__ == "__main__":
     x = input(" ")
 
     if x == "admin":
-        USER.loading()
+        USER.loading() 
         while(True):
-            system.os("clear")
+            os.system("clear")
             
             ADMIN.menu()
 

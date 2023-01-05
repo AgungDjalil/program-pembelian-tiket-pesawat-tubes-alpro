@@ -136,7 +136,7 @@ def loading():
     if os_name == "posix":
         os.system("clear")
         print("loading....")
-        time.sleep(4)
+        time.sleep(0)
         os.system("clear")
         
     else:
