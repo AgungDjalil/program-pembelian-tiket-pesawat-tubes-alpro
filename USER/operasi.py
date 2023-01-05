@@ -54,7 +54,7 @@ def database_pemesan(maskapai, pemesan, tagihan):
     data["tagihan"] = "Rp." + str(tagihan)
     data["maskapai"] = maskapai 
 
-    data_str = f' {data["pk"]}, {data["tanggal_booking"]}, {data["nama"]}, {data["nomor"]}, {data["email"]}, {maskapai}, {data["tagihan"]}\n'
+    data_str = f'{data["pk"]}, {data["tanggal_booking"]}, {data["nama"]}, {data["nomor"]}, {data["email"]}, {maskapai}, {data["tagihan"]}\n'
     
     try:
         with open(database.DB_PEMESAN,'a',encoding="utf-8") as file:
@@ -74,7 +74,7 @@ def database_penumpang(title, nama, thn_tgl_bln, waktu, maskapai, jurusan):
     data["maskapai"] = maskapai + database.TEMPLATE_DATA_PENUMPANG["maskapai"][len(maskapai):]
     data["jurusan"] = jurusan 
 
-    data_str = f' {data["pk"]}, {data["title"]}, {data["nama"]}, {data["waktu"]}, {data["tanggal"]}, {data["maskapai"]}, {data["jurusan"]}\n'
+    data_str = f'{data["pk"]}, {data["title"]}, {data["nama"]}, {data["waktu"]}, {data["tanggal"]}, {data["maskapai"]}, {data["jurusan"]}\n'
 
     try:
         with open(database.DB_PENUMPANG,"a",encoding="utf-8") as file:

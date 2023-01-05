@@ -8,12 +8,18 @@ if __name__ == "__main__":
     x = input(" ")
 
     if x == "admin":
+        USER.loading()
         while(True):
-            USER.loading()
-        
+            system.os("clear")
+            
             ADMIN.menu()
 
-            user_option = input("Masukan opsi: ")
+            while True:
+                user_option = input("Masukan opsi: ")
+                if user_option:
+                    break
+                else:
+                    print("Pilihan Tidak Valid")
 
             ADMIN.opsi_n_DB(user_option)            
 
