@@ -8,7 +8,7 @@ TEMPLATE_DATA_PEMESAN = {
     "nomor": 255*" ",
     "email": 255*" ",
     "maskapai": "XXXX XXXX",
-    "tagihan": "Rp."
+    "tagihan": ""
 }
 
 TEMPLATE_DATA_PENUMPANG = {

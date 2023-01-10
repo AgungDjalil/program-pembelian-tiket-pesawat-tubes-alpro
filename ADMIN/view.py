@@ -1,7 +1,7 @@
 from . import operasi
 import os
 
-
+### Read Data
 def read_console(pilih):
     pilih.lower()
     pilihan = "".join(["data", pilih])
@@ -12,7 +12,7 @@ def read_console(pilih):
         case "pemesan"   : pemesan_data(data_file)
         case "penumpang" : penumpang_data(data_file)  
 
-
+### Search Data
 def search_console(pilih):
     operasi.loading()
     pilih.lower()
@@ -45,7 +45,7 @@ def search_console(pilih):
         tujuan = data[6]
         view_data_penumpang(title, nama, tujuan, waktu, maskapai, tanggal)
        
-
+### Update Data
 def update_console(pilih):
     operasi.loading()
     pilih.lower()
@@ -60,10 +60,9 @@ def update_console(pilih):
         else:
             print("No PK Tidak Valid, Masukkan sekali Lagi")
 
-    if pilih == "pemesan":
-        update_pemesan(data)
-    elif pilih == "penumpang":
-        update_penumpang(data)
+    match pilih:
+        case "pemesan"   : update_pemesan(data)
+        case "penumpang" : update_penumpang(data)
 
 
 def delete_console(pilih):
@@ -74,6 +73,7 @@ def delete_console(pilih):
     no_pk = input("Masukkan No PK\t: ")
     data = operasi.search(no_pk, pilihan)
     pk = data[0]
+
     usr_option = input("Yakin Ingin Dihapus(y/t)? ".lower())
     if usr_option == "y":
         match pilih:
@@ -138,41 +138,55 @@ def penumpang_data(data_file):
 
 
 def view_data_pemesan(nama, no_telp, email, maskapai, tagihan):
+    nama = nama.replace(" ", "")
+    no_telp = no_telp.replace(" ", "")
+    email = email.replace(" ", "")
+    maskapai = maskapai.replace(" ", "")
+    tagihan = tagihan.replace(" ", "")
+
     print("="*40)
     print("DATA PEMESAN".center(39))
+    print("="*40+"\n")
+    print(f"Nama     : {nama}\n")
+    print(f"No.Telp  : {no_telp}\n")
+    print(f"Email    : {email}\n")
+    print(f"Maskapai : {maskapai}\n")
+    print(f"Tagihan  : {tagihan}\n")
     print("="*40)
-    print(f"Nama     : {nama}")
-    print(f"No.Telp  : {no_telp}")
-    print(f"Email    : {email}")
-    print(f"Maskapai : {maskapai}")
-    print("")
-    print(f"Tagihan  : {tagihan}")
 
 
 def view_data_penumpang(title, nama, tujuan, waktu, maskapai, tanggal):
+    title = title.replace(" ", "")
+    nama = nama.replace(" ", "")
+    tujuan = tujuan.replace(" ", "")
+    waktu = waktu.replace(" ", "")
+    maskapai = maskapai.replace(" ", "")
+    tanggal = tanggal.replace(" ", "")
+    
     print("="*40)
     print("DATA PENUMPANG".center(39))
+    print("="*40+'\n')
+    print(f"Title    : {title}\n")
+    print(f"Nama     : {nama}\n")
+    print(f"Tujuan   : {tujuan}\n")
+    print(f"Tanggal  : {tanggal}\n")
+    print(f"Waktu    : {waktu}\n")
+    print(f"Maskapai : {maskapai}\n")
     print("="*40)
-    print(f"Title    : {title}")
-    print("")
-    print(f"Nama     : {nama}")
-    print(f"Tujuan   : {tujuan}")
-    print(f"Tanggal  : {tanggal}")
-    print("")
-    print(f"Waktu    : {waktu}")
-    print("")
-    print(f"Maskapai : {maskapai}")
 
 
 def update_pemesan(data):
-    pk = data[0]
-    tgl_booking = data[1]
+    os.system("clear")
+    pk = data[0].replace(" ", "")
     nama = data[2]
-    no_telp = data[3]
-    email = data[4]
-    maskapai = data[5]
-    tagihan = data[6]
+    tgl_booking = data[1].replace(" ", "")
+    no_telp = data[3].replace(" ", "")
+    email = data[4].replace(" ", "")
+    maskapai = data[5].replace(" ", "")
+    tagihan = data[6].replace(" ", "")
     
+    view_data_pemesan(nama, no_telp, email, maskapai, tagihan)
+
     print("\nOption\n1. nama\n2. No_telp\n3. email\n")
     user_option = input("Pilih Data Yang Ingin Diubah[1,2,3]\t: ")
 
@@ -180,28 +194,31 @@ def update_pemesan(data):
         case "1": nama = input("Masukkan Nama\t: ")
         case "2": no_telp = input("Masukkan No.Telp\t: ")
         case "3": email = input("Masukkan Email\t: ")
-        
+
     os.system("clear")
     print("="*40)
     print("DATA BARU ANDA".center(39))
     print("="*40)
-    print(f"Nama    :{nama}\n")
-    print(f"No.Telp : {no_telp}")
+    print(f"Nama    : {nama}\n")
+    print(f"No.Telp : {no_telp}\n")
     print(f"Email   : {email}\n")
     print("="*40)
 
+    nama = nama.replace(" ", "")
     operasi.update_pemesan(pk, tgl_booking, nama, no_telp, email, maskapai, tagihan)
     x = input("")
 
 
 def update_penumpang(data):
-    pk = data[0]
-    title = data[1]
+    pk = data[0].replace(" ", "")
+    title = data[1].replace(" ", "")
     nama = data[2]
-    waktu = data[3]
-    tanggal = data[4]
-    maskapai = data[5]
-    jurusan = data[6]
+    waktu = data[3].replace(" ", "")
+    tanggal = data[4].replace(" ", "")
+    maskapai = data[5].replace(" ", "")
+    jurusan = data[6].replace(" ", "")
+
+    view_data_penumpang(title, nama, jurusan, waktu, maskapai, tanggal)
 
     print("\nOption\n1. Title\n2. nama\n3. No_telp\n4. email\n")
     user_option = input("Pilih Data Yang Ingin Diubah[1,2,3,4]\t: ")
@@ -215,11 +232,12 @@ def update_penumpang(data):
     os.system("clear")
     print("="*40)
     print("DATA BARU ANDA".center(39))
-    print("="*40)
-    print(f"Title   : {title}")
-    print(f"Nama    :{nama}\n")
-    print(f"Waktu   : {waktu}")
+    print("="*40+"\n")
+    print(f"Title   : {title}\n")
+    print(f"Nama    : {nama}\n")
+    print(f"Waktu   : {waktu}\n")
     print("="*40)
 
-    operasi.update_penumpang(pk, title, nama, waktu, tanggal, maskapai, jurusan)
+    name = nama.replace(" ", "")
+    operasi.update_penumpang(pk, title, name, waktu, tanggal, maskapai, jurusan)
     x =input("")

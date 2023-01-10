@@ -33,32 +33,25 @@ def update_pemesan(pk, tgl_booking, nama, no_telp, email, maskapai, tagihan):
     data = database.TEMPLATE_DATA_PEMESAN.copy()
 
     data["pk"] = pk
-    data["tanggal_booking"] = tgl_booking
+    data["tanggal_booking"] = str(tgl_booking)
     data["nama"] = nama + database.TEMPLATE_DATA_PEMESAN["nama"][len(nama):]
     data["nomor"] = no_telp + database.TEMPLATE_DATA_PEMESAN["nomor"][len(no_telp):]
     data["email"] = email + database.TEMPLATE_DATA_PEMESAN["email"][len(email):]
-    data["tagihan"] = tagihan
+    data["tagihan"] = tagihan 
     data["maskapai"] = maskapai 
 
-    data_str = f'{data["pk"]},{data["tanggal_booking"]}, {data["nama"]},{data["nomor"]},{data["email"]},{maskapai},{data["tagihan"]}'
+    data_str = f'{data["pk"]}, {data["tanggal_booking"]}, {data["nama"]}, {data["nomor"]}, {data["email"]}, {maskapai}, {data["tagihan"]}'
    
     panjang_data = len(data_str)
    
     try:
-        with open(database.DB_PEMESAN,"r+",encoding="utf-8") as file:
+        with open(database.DB_PEMESAN,"r+", encoding="utf-8") as file:
             data = file.readlines()
-            index = 0
-            while True:
-                content = data[index]
-                data_split = content.split(",")
-                cpk = data_split[0]
-                if cpk == pk:
-                    break
-
-                index += 1
+            index = cari_index(pk, data)
 
             file.seek(panjang_data*index)
             file.write(data_str)
+
     except:
         print("Error Dalam Update Data")
 
@@ -82,15 +75,7 @@ def update_penumpang(pk, title, nama, waktu, tanggal, maskapai, jurusan):
     try:
         with open(database.DB_PENUMPANG,"r+",encoding="utf-8") as file:
             data = file.readlines()
-            index = 0
-            while True:
-                content = data[index]
-                data_split = content.split(",")
-                cpk = data_split[0]
-                if cpk == pk:
-                    break
-
-                index += 1
+            index = cari_index(pk, data)
 
             file.seek(panjang_data*index)
             file.write(data_str)
@@ -100,21 +85,36 @@ def update_penumpang(pk, title, nama, waktu, tanggal, maskapai, jurusan):
 
 def delete_pemesan(pk):
     try:
-        with open(database.DB_PEMESAN,"r+",encoding="utf-8") as file:
+        with open(database.DB_PEMESAN,"r") as file:
             data = file.readlines()
-            index = 0
-            while True:
-                content = data[index]
-                data_split = content.split(",")
-                cpk = data_split[0]
-                if cpk == pk:
+            index = cari_index(pk,data)
+            counter = 0
+            while(True):
+                if len(data) == 0:
                     break
-
-                index += 1
-
-            del data[index]
+                elif counter == index:
+                    pass
+                else:
+                    with open("datatemp.txt",'a',encoding="utf-8") as temp_file:
+                        temp_file.write(data)
+                counter += 1           
     except:
-        print("Error Dalam Update Data")
+        print("Error Dalam Delete Data")
+    
+    os.rename("datatemp.txt",database.DB_PEMESAN)
+
+
+def cari_index(pk, data):
+    counter = 0
+    while True:
+        content = data[counter]
+        data_split = content.split(",")
+        cpk = data_split[0]
+        if cpk == pk:
+            return counter
+            break
+
+        counter += 1
 
 
 def loading():
