@@ -7,16 +7,16 @@ TEMPLATE_DATA_PEMESAN = {
     "nama": 222*" ",
     "nomor": 255*" ",
     "email": 255*" ",
-    "maskapai": "XXXX XXXX",
-    "tagihan": "Rp."
+    "maskapai": 255*" ",
+    "tagihan": 255*" "
 }
 
 TEMPLATE_DATA_PENUMPANG = {
-    "pk": 255*" ",
-    "title": 255*" ",
+    "pk": "xxxxxxxxxx",
+    "title": "XX",
     "nama": 255*" ",
-    "waktu": "yyyy-mm-dd",
-    "tanggal": "yyyy-mm-dd",
+    "waktu": 255*" ",
+    "tanggal": 100*" ",
     "jurusan": 255*" ",
-    "maskapai": "XXXXXXXX "
+    "maskapai": 255*" "
 }

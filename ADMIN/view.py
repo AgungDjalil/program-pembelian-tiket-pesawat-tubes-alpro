@@ -70,15 +70,27 @@ def delete_console(pilih):
     pilih.lower()
     pilihan = "".join(["data", pilih])
 
-    no_pk = input("Masukkan No PK\t: ")
-    data = operasi.search(no_pk, pilihan)
+    while(True):
+        no_pk = str(input("Masukkan PK\t: "))    
+        data = operasi.search(no_pk, pilihan)
+        if data:
+            break
+        else:
+            print("No PK Tidak Valid, Masukkan sekali Lagi")
+
+    nama = data[2]
+    no_telp = data[3]
+    email = data[4]
+    maskapai = data[5]
+    tagihan = data[6]
+    view_data_pemesan(nama, no_telp, email, maskapai, tagihan)
     pk = data[0]
 
     usr_option = input("Yakin Ingin Dihapus(y/t)? ".lower())
     if usr_option == "y":
         match pilih:
             case "pemesan"   : operasi.delete_pemesan(pk)
-            case "penumpang" : operasi.delete_pemesan(pk)   
+            case "penumpang" : operasi.delete_penumpang(pk)   
 
 
 def pemesan_data(data_file):
@@ -144,6 +156,7 @@ def view_data_pemesan(nama, no_telp, email, maskapai, tagihan):
     maskapai = maskapai.replace(" ", "")
     tagihan = tagihan.replace(" ", "")
 
+    os.system("clear")
     print("="*40)
     print("DATA PEMESAN".center(39))
     print("="*40+"\n")
@@ -163,6 +176,7 @@ def view_data_penumpang(title, nama, tujuan, waktu, maskapai, tanggal):
     maskapai = maskapai.replace(" ", "")
     tanggal = tanggal.replace(" ", "")
     
+    os.system("clear")
     print("="*40)
     print("DATA PENUMPANG".center(39))
     print("="*40+'\n')
@@ -176,14 +190,13 @@ def view_data_penumpang(title, nama, tujuan, waktu, maskapai, tanggal):
 
 
 def update_pemesan(data):
-    os.system("clear")
-    pk = data[0].replace(" ", "")
+    pk = data[0]
     nama = data[2]
-    tgl_booking = data[1].replace(" ", "")
-    no_telp = data[3].replace(" ", "")
-    email = data[4].replace(" ", "")
-    maskapai = data[5].replace(" ", "")
-    tagihan = data[6].replace(" ", "")
+    tgl_booking = data[1]
+    no_telp = data[3]
+    email = data[4]
+    maskapai = data[5]
+    tagihan = data[6]
     
     view_data_pemesan(nama, no_telp, email, maskapai, tagihan)
 
@@ -198,25 +211,24 @@ def update_pemesan(data):
     os.system("clear")
     print("="*40)
     print("DATA BARU ANDA".center(39))
-    print("="*40)
+    print("="*40+"\n")
     print(f"Nama    : {nama}\n")
     print(f"No.Telp : {no_telp}\n")
     print(f"Email   : {email}\n")
     print("="*40)
 
-    nama = nama.replace(" ", "")
     operasi.update_pemesan(pk, tgl_booking, nama, no_telp, email, maskapai, tagihan)
     x = input("")
 
 
 def update_penumpang(data):
-    pk = data[0].replace(" ", "")
-    title = data[1].replace(" ", "")
-    nama = data[2]
-    waktu = data[3].replace(" ", "")
-    tanggal = data[4].replace(" ", "")
-    maskapai = data[5].replace(" ", "")
-    jurusan = data[6].replace(" ", "")
+    pk = data[0]
+    title = data[1]
+    nama = data[2] 
+    waktu = data[3]
+    tanggal = data[4]
+    maskapai = data[5]
+    jurusan = data[6]
 
     view_data_penumpang(title, nama, jurusan, waktu, maskapai, tanggal)
 
@@ -238,6 +250,5 @@ def update_penumpang(data):
     print(f"Waktu   : {waktu}\n")
     print("="*40)
 
-    name = nama.replace(" ", "")
-    operasi.update_penumpang(pk, title, name, waktu, tanggal, maskapai, jurusan)
+    operasi.update_penumpang(pk, title, nama, waktu, tanggal, maskapai, jurusan)
     x =input("")

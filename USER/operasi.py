@@ -37,7 +37,7 @@ def read_plane(**kwargs):
 
 
 def database_pemesan(maskapai, pemesan, tagihan):
-
+    tagihan = str(tagihan)
     data_break = pemesan.split(",")
     nama = data_break[0]
     nomor = data_break[1]
@@ -46,15 +46,15 @@ def database_pemesan(maskapai, pemesan, tagihan):
 
     data = database.TEMPLATE_DATA_PEMESAN.copy()
 
-    data["pk"] = random_string(10)
+    data["pk"] = random_string(11)
     data["tanggal_booking"] = time.strftime("%Y-%m-%d-%H-%M-%S%z",time.gmtime())
     data["nama"] = nama + database.TEMPLATE_DATA_PEMESAN["nama"][len(nama):]
     data["nomor"] = nomor + database.TEMPLATE_DATA_PEMESAN["nomor"][len(nomor):]
     data["email"] = email + database.TEMPLATE_DATA_PEMESAN["email"][len(email):]
-    data["tagihan"] = "Rp." + str(tagihan)
-    data["maskapai"] = maskapai 
+    data["tagihan"] = tagihan + database.TEMPLATE_DATA_PEMESAN["tagihan"][len(tagihan):] 
+    data["maskapai"] = maskapai + database.TEMPLATE_DATA_PEMESAN["maskapai"][len(maskapai):]
 
-    data_str = f'{data["pk"]}, {data["tanggal_booking"]}, {data["nama"]}, {data["nomor"]}, {data["email"]}, {maskapai}, {data["tagihan"]}\n'
+    data_str = f'{data["pk"]},{data["tanggal_booking"]},{data["nama"]},{data["nomor"]},{data["email"]},{data["maskapai"]},{data["tagihan"]}\n'
     
     try:
         with open(database.DB_PEMESAN,'a',encoding="utf-8") as file:
@@ -64,17 +64,20 @@ def database_pemesan(maskapai, pemesan, tagihan):
 
 
 def database_penumpang(title, nama, thn_tgl_bln, waktu, maskapai, jurusan):
+    waktu = waktu.replace(" ", "")
     thn_tgl_bln = str(thn_tgl_bln)
+
     data = database.TEMPLATE_DATA_PENUMPANG.copy()
-    data["pk"] = random_string(10)
+
+    data["pk"] = random_string(11)
     data["title"] = title 
     data["nama"] = nama + database.TEMPLATE_DATA_PENUMPANG["nama"][len(nama):] 
-    data["waktu"] = waktu 
-    data["tanggal"] = thn_tgl_bln + database.TEMPLATE_DATA_PENUMPANG["tanggal"][len(thn_tgl_bln):]
-    data["maskapai"] = maskapai + database.TEMPLATE_DATA_PENUMPANG["maskapai"][len(maskapai):]
-    data["jurusan"] = jurusan 
+    data["waktu"] = waktu + database.TEMPLATE_DATA_PENUMPANG["waktu"][len(waktu):] 
+    data["tanggal"] = thn_tgl_bln + database.TEMPLATE_DATA_PENUMPANG["tanggal"][len(thn_tgl_bln):] 
+    data["maskapai"] = maskapai + database.TEMPLATE_DATA_PENUMPANG["maskapai"][len(maskapai):] 
+    data["jurusan"] = jurusan + database.TEMPLATE_DATA_PENUMPANG["jurusan"][len(jurusan):]
 
-    data_str = f'{data["pk"]}, {data["title"]}, {data["nama"]}, {data["waktu"]}, {data["tanggal"]}, {data["maskapai"]}, {data["jurusan"]}\n'
+    data_str = f'{data["pk"]},{data["title"]},{data["nama"]},{data["waktu"]},{data["tanggal"]},{data["maskapai"]},{data["jurusan"]}\n'
 
     try:
         with open(database.DB_PENUMPANG,"a",encoding="utf-8") as file:

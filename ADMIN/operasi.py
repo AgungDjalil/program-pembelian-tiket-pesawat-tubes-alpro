@@ -37,10 +37,10 @@ def update_pemesan(pk, tgl_booking, nama, no_telp, email, maskapai, tagihan):
     data["nama"] = nama + database.TEMPLATE_DATA_PEMESAN["nama"][len(nama):]
     data["nomor"] = no_telp + database.TEMPLATE_DATA_PEMESAN["nomor"][len(no_telp):]
     data["email"] = email + database.TEMPLATE_DATA_PEMESAN["email"][len(email):]
-    data["tagihan"] = tagihan 
-    data["maskapai"] = maskapai 
+    data["tagihan"] = tagihan + database.TEMPLATE_DATA_PEMESAN["tagihan"][len(tagihan):] 
+    data["maskapai"] = maskapai + database.TEMPLATE_DATA_PEMESAN["maskapai"][len(maskapai):]
 
-    data_str = f'{data["pk"]}, {data["tanggal_booking"]}, {data["nama"]}, {data["nomor"]}, {data["email"]}, {maskapai}, {data["tagihan"]}'
+    data_str = f'{data["pk"]},{data["tanggal_booking"]},{data["nama"]},{data["nomor"]},{data["email"]},{data["maskapai"]},{data["tagihan"]}'
    
     panjang_data = len(data_str)
    
@@ -63,12 +63,12 @@ def update_penumpang(pk, title, nama, waktu, tanggal, maskapai, jurusan):
     data["pk"] = pk
     data["title"] = title 
     data["nama"] = nama + database.TEMPLATE_DATA_PENUMPANG["nama"][len(nama):] 
-    data["waktu"] = waktu 
-    data["tanggal"] = tanggal + database.TEMPLATE_DATA_PENUMPANG["tanggal"][len(tanggal):]
-    data["maskapai"] = maskapai + database.TEMPLATE_DATA_PENUMPANG["maskapai"][len(maskapai):]
-    data["jurusan"] = jurusan 
+    data["waktu"] = waktu + database.TEMPLATE_DATA_PENUMPANG["waktu"][len(waktu):] 
+    data["tanggal"] = tanggal  + database.TEMPLATE_DATA_PENUMPANG["tanggal"][len(tanggal):]
+    data["maskapai"] = maskapai + database.TEMPLATE_DATA_PENUMPANG["maskapai"][len(maskapai):] 
+    data["jurusan"] = jurusan + database.TEMPLATE_DATA_PENUMPANG["jurusan"][len(jurusan):]
 
-    data_str = f'{data["pk"]}, {data["title"]}, {data["nama"]}, {data["waktu"]}, {data["tanggal"]}, {data["maskapai"]}, {data["jurusan"]}\n'
+    data_str = f'{data["pk"]},{data["title"]},{data["nama"]},{data["waktu"]},{data["tanggal"]},{data["maskapai"]},{data["jurusan"]}'
 
     panjang_data = len(data_str)
 
@@ -85,23 +85,30 @@ def update_penumpang(pk, title, nama, waktu, tanggal, maskapai, jurusan):
 
 def delete_pemesan(pk):
     try:
-        with open(database.DB_PEMESAN,"r") as file:
-            data = file.readlines()
-            index = cari_index(pk,data)
-            counter = 0
-            while(True):
-                if len(data) == 0:
-                    break
-                elif counter == index:
-                    pass
-                else:
-                    with open("datatemp.txt",'a',encoding="utf-8") as temp_file:
-                        temp_file.write(data)
-                counter += 1           
+        with open(database.DB_PEMESAN, "r") as file:
+            content = file.readlines()
+            data_ke = cari_index(pk, content)
+
+            with open(database.DB_PEMESAN,"w") as file:
+                for index,data in enumerate(content):
+                    if index != data_ke:
+                        file.write(data)
     except:
         print("Error Dalam Delete Data")
-    
-    os.rename("datatemp.txt",database.DB_PEMESAN)
+
+
+def delete_penumpang(pk):
+    try:
+        with open(database.DB_PENUMPANG, "r") as file:
+            content = file.readlines()
+            data_ke = cari_index(pk, content)
+
+            with open(database.DB_PENUMPANG,"w") as file:
+                for index,data in enumerate(content):
+                    if index != data_ke:
+                        file.write(data)
+    except:
+        print("Error Dalam Delete Data")
 
 
 def cari_index(pk, data):
