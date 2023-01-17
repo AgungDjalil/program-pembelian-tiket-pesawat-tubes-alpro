@@ -1,26 +1,26 @@
 from . import operasi
 import os
 
-### Read Data
+
 def read_console(pilih):
     pilih.lower()
     pilihan = "".join(["data", pilih])
-   
-    data_file = operasi.read(pilihan)
-    
-    match pilih:
-        case "pemesan"   : pemesan_data(data_file)
-        case "penumpang" : penumpang_data(data_file)  
 
-### Search Data
+    data_file = operasi.read(pilihan)
+
+    match pilih:
+        case "pemesan": pemesan_data(data_file)
+        case "penumpang": penumpang_data(data_file)
+
+
 def search_console(pilih):
     operasi.loading()
     pilih.lower()
     pilihan = "".join(["data", pilih])
     print("")
 
-    while(True):
-        no_pk = str(input("Masukkan PK\t: "))    
+    while (True):
+        no_pk = str(input("Masukkan PK\t: "))
         data = operasi.search(no_pk, pilihan)
         if data:
             break
@@ -44,16 +44,16 @@ def search_console(pilih):
         maskapai = data[5]
         tujuan = data[6]
         view_data_penumpang(title, nama, tujuan, waktu, maskapai, tanggal)
-       
-### Update Data
+
+
 def update_console(pilih):
     operasi.loading()
     pilih.lower()
     pilihan = "".join(["data", pilih])
     print("")
 
-    while(True):
-        no_pk = str(input("Masukkan PK\t: "))    
+    while (True):
+        no_pk = str(input("Masukkan PK\t: "))
         data = operasi.search(no_pk, pilihan)
         if data:
             break
@@ -61,8 +61,25 @@ def update_console(pilih):
             print("No PK Tidak Valid, Masukkan sekali Lagi")
 
     match pilih:
-        case "pemesan"   : update_pemesan(data)
-        case "penumpang" : update_penumpang(data)
+        case "pemesan": update_pemesan(data)
+        case "penumpang": update_penumpang(data)
+
+
+def sort_console(pilih):
+    operasi.loading()
+    pilih.lower()
+    pilihan = "".join(["data", pilih])
+    print("")
+
+    while (True):
+        data = operasi.data_sort(nama_file=pilihan)
+        match pilih:
+            case "pemesan": pemesan_data(data)
+            case "penumpang": penumpang_data(data)
+
+        usr_options = input("Apakah Selesai (y/t)\t: ".lower())
+        if usr_options == "y":
+            break
 
 
 def delete_console(pilih):
@@ -70,8 +87,8 @@ def delete_console(pilih):
     pilih.lower()
     pilihan = "".join(["data", pilih])
 
-    while(True):
-        no_pk = str(input("Masukkan PK\t: "))    
+    while (True):
+        no_pk = str(input("Masukkan PK\t: "))
         data = operasi.search(no_pk, pilihan)
         if data:
             break
@@ -89,12 +106,12 @@ def delete_console(pilih):
     usr_option = input("Yakin Ingin Dihapus(y/t)? ".lower())
     if usr_option == "y":
         match pilih:
-            case "pemesan"   : operasi.delete_pemesan(pk)
-            case "penumpang" : operasi.delete_penumpang(pk)   
+            case "pemesan": operasi.delete_pemesan(pk)
+            case "penumpang": operasi.delete_penumpang(pk)
 
 
 def pemesan_data(data_file):
-    ## header
+    # header
     no = "NO"
     tanggal = "TANGGAL"
     nama = "NAMA"
@@ -106,8 +123,8 @@ def pemesan_data(data_file):
     print(f"{no:3} | {tanggal:15} | {nama:20} | {nomor:10} | {tagihan:.10}")
     print("-"*56)
 
-    ## content
-    for index,data in enumerate(data_file):
+    # content
+    for index, data in enumerate(data_file):
         data_break = data.split(",")
         pk = data_break[0]
         tanggal = data_break[1]
@@ -116,26 +133,27 @@ def pemesan_data(data_file):
         email = data_break[2]
         maskapai = data_break[5]
         tagihan = data_break[6]
-        print(f"{index+1:3} | {tanggal:.15} | {nama:.20} | {nomor:.10} | {tagihan:.10}\n")
+        print(
+            f"{index+1:3} | {tanggal:.15} | {nama:.20} | {nomor:.10} | {tagihan:.10}\n")
 
-    ## footer
+    # footer
     print("="*56)
 
-      
+
 def penumpang_data(data_file):
-    ## Header
+    # Header
     no = "NO"
     nama = "NAMA"
     waktu = "WAKTU"
     tanggal = "TANGGAL"
     maskapai = "MASKAPAI"
- 
+
     print("="*56)
     print(f"{no:2} | {nama:10} | {waktu:10} | {tanggal:10} | {maskapai:10}")
     print("-"*56)
-            
-    ## Content
-    for index,data in enumerate(data_file):
+
+    # Content
+    for index, data in enumerate(data_file):
         data_break = data.split(",")
         title = data_break[1]
         nama = data_break[2]
@@ -143,9 +161,10 @@ def penumpang_data(data_file):
         tanggal = data_break[4]
         maskapai = data_break[5]
         nama = " ".join([title, nama])
-        print(f"{index+1:3} | {nama:.15} | {waktu:.10} | {tanggal:.10} | {maskapai:.10}\n")
+        print(
+            f"{index+1:3} | {nama:.15} | {waktu:.10} | {tanggal:.10} | {maskapai:.10}\n")
 
-    ## Footer
+    # Footer
     print("="*56)
 
 
@@ -175,7 +194,7 @@ def view_data_penumpang(title, nama, tujuan, waktu, maskapai, tanggal):
     waktu = waktu.replace(" ", "")
     maskapai = maskapai.replace(" ", "")
     tanggal = tanggal.replace(" ", "")
-    
+
     os.system("clear")
     print("="*40)
     print("DATA PENUMPANG".center(39))
@@ -197,7 +216,7 @@ def update_pemesan(data):
     email = data[4]
     maskapai = data[5]
     tagihan = data[6]
-    
+
     view_data_pemesan(nama, no_telp, email, maskapai, tagihan)
 
     print("\nOption\n1. nama\n2. No_telp\n3. email\n")
@@ -217,14 +236,15 @@ def update_pemesan(data):
     print(f"Email   : {email}\n")
     print("="*40)
 
-    operasi.update_pemesan(pk, tgl_booking, nama, no_telp, email, maskapai, tagihan)
+    operasi.update_pemesan(pk, tgl_booking, nama,
+                           no_telp, email, maskapai, tagihan)
     x = input("")
 
 
 def update_penumpang(data):
     pk = data[0]
     title = data[1]
-    nama = data[2] 
+    nama = data[2]
     waktu = data[3]
     tanggal = data[4]
     maskapai = data[5]
@@ -240,7 +260,7 @@ def update_penumpang(data):
         case "1": title = input("Masukkan Title\t: ")
         case "2": nama = input("Masukkan Nama\t: ")
         case "3": waktu = input("Masukkan Waktu\t: ")
-        
+
     os.system("clear")
     print("="*40)
     print("DATA BARU ANDA".center(39))
@@ -250,5 +270,6 @@ def update_penumpang(data):
     print(f"Waktu   : {waktu}\n")
     print("="*40)
 
-    operasi.update_penumpang(pk, title, nama, waktu, tanggal, maskapai, jurusan)
-    x =input("")
+    operasi.update_penumpang(pk, title, nama, waktu,
+                             tanggal, maskapai, jurusan)
+    x = input("")
