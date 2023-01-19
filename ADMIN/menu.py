@@ -13,14 +13,18 @@ def menu():
     
 
 def opsi_n_DB(user_option):
-    pilih = input("Baca Database Pemesan/Penumpang\t: ")
-    match user_option:
-        case "1" : view.read_console(pilih)
-        case "2" : view.search_console(pilih)
-        case "3" : view.update_console(pilih) 
-        case "4" : view.sort_console(pilih)
-        case "5" : view.delete_console(pilih)
-        
+    while True:
+        pilih = input("Baca Database Pemesan/Penumpang\t: ")
+        if pilih in ["pemesan","penumpang"] :
+            view.read_data()
+            match user_option:
+                case "1" : view.read_console(pilih)
+                case "2" : view.search_console(pilih)
+                case "3" : view.update_console(pilih) 
+                case "4" : view.sort_console(pilih)
+                case "5" : view.delete_console(pilih)
+        else:
+            print("Pilihan Tidak Valid")        
  
 
     

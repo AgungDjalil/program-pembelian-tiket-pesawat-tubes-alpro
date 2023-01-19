@@ -16,7 +16,7 @@ if __name__ == "__main__":
 
             while True:
                 user_option = input("Masukan opsi: ")
-                if user_option:
+                if user_option in ["1","2","3","4","5"] :
                     break
                 else:
                     print("Pilihan Tidak Valid")
