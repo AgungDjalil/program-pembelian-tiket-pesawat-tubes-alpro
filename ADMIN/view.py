@@ -119,9 +119,9 @@ def pemesan_data(data_file):
     email = "EMAIL"
     tagihan = "TAGIHAN"
 
-    print("="*56)
+    print("="*70)
     print(f"{no:3} | {tanggal:15} | {nama:20} | {nomor:10} | {tagihan:.10}")
-    print("-"*56)
+    print("-"*70)
 
     # content
     for index, data in enumerate(data_file):
@@ -137,7 +137,7 @@ def pemesan_data(data_file):
             f"{index+1:3} | {tanggal:.15} | {nama:.20} | {nomor:.10} | {tagihan:.10}\n")
 
     # footer
-    print("="*56)
+    print("="*72)
 
 
 def penumpang_data(data_file):
@@ -148,9 +148,9 @@ def penumpang_data(data_file):
     tanggal = "TANGGAL"
     maskapai = "MASKAPAI"
 
-    print("="*56)
+    print("="*70)
     print(f"{no:2} | {nama:10} | {waktu:10} | {tanggal:10} | {maskapai:10}")
-    print("-"*56)
+    print("-"*70)
 
     # Content
     for index, data in enumerate(data_file):
