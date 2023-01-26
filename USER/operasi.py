@@ -1,7 +1,8 @@
 from . import database
 from .util import random_string
 from time import time
-import time, os
+import time
+import os
 from . import inputan
 
 
@@ -27,7 +28,7 @@ def read_plane(**kwargs):
                 index_data = kwargs["no_pesawat"]-1
                 if index_data < 0 or index_data > jumlah_data:
                     return False
-                else:    
+                else:
                     return content[index_data]
             else:
                 return content
@@ -42,22 +43,26 @@ def database_pemesan(maskapai, pemesan, tagihan):
     nama = data_break[0]
     nomor = data_break[1]
     email = data_break[2]
-    
 
     data = database.TEMPLATE_DATA_PEMESAN.copy()
 
     data["pk"] = random_string(11)
-    data["tanggal_booking"] = time.strftime("%Y-%m-%d-%H-%M-%S%z",time.gmtime())
+    data["tanggal_booking"] = time.strftime(
+        "%Y-%m-%d-%H-%M-%S%z", time.gmtime())
     data["nama"] = nama + database.TEMPLATE_DATA_PEMESAN["nama"][len(nama):]
-    data["nomor"] = nomor + database.TEMPLATE_DATA_PEMESAN["nomor"][len(nomor):]
-    data["email"] = email + database.TEMPLATE_DATA_PEMESAN["email"][len(email):]
-    data["tagihan"] = tagihan + database.TEMPLATE_DATA_PEMESAN["tagihan"][len(tagihan):] 
-    data["maskapai"] = maskapai + database.TEMPLATE_DATA_PEMESAN["maskapai"][len(maskapai):]
+    data["nomor"] = nomor + \
+        database.TEMPLATE_DATA_PEMESAN["nomor"][len(nomor):]
+    data["email"] = email + \
+        database.TEMPLATE_DATA_PEMESAN["email"][len(email):]
+    data["tagihan"] = tagihan + \
+        database.TEMPLATE_DATA_PEMESAN["tagihan"][len(tagihan):]
+    data["maskapai"] = maskapai + \
+        database.TEMPLATE_DATA_PEMESAN["maskapai"][len(maskapai):]
 
     data_str = f'{data["pk"]},{data["tanggal_booking"]},{data["nama"]},{data["nomor"]},{data["email"]},{data["maskapai"]},{data["tagihan"]}\n'
-    
+
     try:
-        with open(database.DB_PEMESAN,'a',encoding="utf-8") as file:
+        with open(database.DB_PEMESAN, 'a', encoding="utf-8") as file:
             file.write(data_str)
     except:
         print("Data sulit ditambahkan boooos, gagal maning")
@@ -70,17 +75,21 @@ def database_penumpang(title, nama, thn_tgl_bln, waktu, maskapai, jurusan):
     data = database.TEMPLATE_DATA_PENUMPANG.copy()
 
     data["pk"] = random_string(11)
-    data["title"] = title 
-    data["nama"] = nama + database.TEMPLATE_DATA_PENUMPANG["nama"][len(nama):] 
-    data["waktu"] = waktu + database.TEMPLATE_DATA_PENUMPANG["waktu"][len(waktu):] 
-    data["tanggal"] = thn_tgl_bln + database.TEMPLATE_DATA_PENUMPANG["tanggal"][len(thn_tgl_bln):] 
-    data["maskapai"] = maskapai + database.TEMPLATE_DATA_PENUMPANG["maskapai"][len(maskapai):] 
-    data["jurusan"] = jurusan + database.TEMPLATE_DATA_PENUMPANG["jurusan"][len(jurusan):]
+    data["title"] = title
+    data["nama"] = nama + database.TEMPLATE_DATA_PENUMPANG["nama"][len(nama):]
+    data["waktu"] = waktu + \
+        database.TEMPLATE_DATA_PENUMPANG["waktu"][len(waktu):]
+    data["tanggal"] = thn_tgl_bln + \
+        database.TEMPLATE_DATA_PENUMPANG["tanggal"][len(thn_tgl_bln):]
+    data["maskapai"] = maskapai + \
+        database.TEMPLATE_DATA_PENUMPANG["maskapai"][len(maskapai):]
+    data["jurusan"] = jurusan + \
+        database.TEMPLATE_DATA_PENUMPANG["jurusan"][len(jurusan):]
 
     data_str = f'{data["pk"]},{data["title"]},{data["nama"]},{data["waktu"]},{data["tanggal"]},{data["maskapai"]},{data["jurusan"]}\n'
 
     try:
-        with open(database.DB_PENUMPANG,"a",encoding="utf-8") as file:
+        with open(database.DB_PENUMPANG, "a", encoding="utf-8") as file:
             file.write(data_str)
     except:
         print("Data tidak dapat ditambahkan")
@@ -94,7 +103,7 @@ def data_penumpang(total_penumpang, thn_tgl_bln, waktu, maskapai, Jurusan):
         titel = inputan.title()
         nama_depan = inputan.nama_depan()
         nama_belakang = inputan.nama_belakang()
-        nama = " ".join({nama_depan, nama_belakang})
+        nama = " ".join([nama_depan, nama_belakang])
 
         data = titel + nama
 
@@ -141,7 +150,7 @@ def loading():
         print("loading....")
         time.sleep(0)
         os.system("clear")
-        
+
     else:
         os.system("cls")
         print("Loading....")

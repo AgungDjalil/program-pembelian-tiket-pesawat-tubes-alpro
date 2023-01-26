@@ -1,6 +1,5 @@
 
 
-
 def kota_asal():
     while True:
         dari = input("Kota Keberangkatan\t: ")
@@ -67,7 +66,7 @@ def tahun():
 
 
 def jumlah_dewasa():
-    while True:  
+    while True:
         try:
             penumpang_dewasa = int(input("Dewasa              \t: "))
             if penumpang_dewasa >= 6:
@@ -80,7 +79,7 @@ def jumlah_dewasa():
 
 
 def jumlah_anak():
-    while True:          
+    while True:
         try:
             penumpang_anak = int(input("Anak                \t: "))
             if penumpang_anak >= 3:
@@ -94,21 +93,22 @@ def jumlah_anak():
 
 def jumlah_infant():
     while True:
-            try:
-                penumpang_bayi = int(input("Bayi                \t: "))
-                if penumpang_bayi >= 2:
-                    print("Terlalu banyak bayi")
-                else:
-                    return penumpang_bayi
-                    break
-            except ValueError:
-                print("Masukkan Dengan Angka")
+        try:
+            penumpang_bayi = int(input("Bayi                \t: "))
+            if penumpang_bayi >= 2:
+                print("Terlalu banyak bayi")
+            else:
+                return penumpang_bayi
+                break
+        except ValueError:
+            print("Masukkan Dengan Angka")
 
 
 def pesan():
     while True:
         print("Frequently Added to Booking")
-        asuransi_perjalanan = input("◽ Travel Asuransi Rp 37.000/pax? (ya/tidak) : ")
+        asuransi_perjalanan = input(
+            "◽ Travel Asuransi Rp 37.000/pax? (ya/tidak) : ")
         print("")
 
         if asuransi_perjalanan == "ya":
@@ -120,19 +120,19 @@ def pesan():
             return asuransi
             break
         else:
-            print ("Please try again")
+            print("Please try again")
 
 
 def data_pemesan():
     print("Contact Details (for E-ticket/Voucher)")
     while True:
-        nama = input("◾ Nama Lengkap    \t: ")
+        nama = input("◾ Nama Lengkap    \t: ").title()
         if nama == "":
             print("\nTolong masukkan nama")
         else:
-            break    
+            break
 
-    while True:        
+    while True:
         nomor = input("◾ Nomor Handphone \t: +62 ")
         if nomor == "":
             print("Masukkan Nomor Telephone")
@@ -146,20 +146,20 @@ def data_pemesan():
             except ValueError:
                 print("Masukkan dengan angka")
 
-    while True:            
+    while True:
         email = input("◾ Email           \t: ")
         if email == "":
-            print ("Tolong masukan email addres")
+            print("Tolong masukan email addres")
         else:
-            break  
-    
+            break
+
     pemesan = f"{nama},{nomor},{email}"
     return pemesan
-    
+
 
 def title():
     while True:
-        title = input("◾ Title (Mr/Ms) : ")
+        title = input("◾ Title (Mr/Ms)           : ").title()
         if title not in ['Mr', 'Mrs', 'Ms']:
             print("Pilihan Tidak Valid")
         elif title == "":
@@ -171,17 +171,17 @@ def title():
 
 def nama_depan():
     while True:
-        first_name = input("◾ First Name              : ")
+        first_name = input("◾ First Name              : ").title()
         if first_name == "":
             print("Please enter the name of passenger")
         else:
-            return first_name           
+            return first_name
             break
-        
+
 
 def nama_belakang():
     while True:
-        last_name = input("◾ Last Name              : ")
+        last_name = input("◾ Last Name               : ").title()
         if last_name == "":
             print("Please enter the name of passenger")
         else:

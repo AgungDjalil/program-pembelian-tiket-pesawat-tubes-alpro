@@ -8,25 +8,23 @@ if __name__ == "__main__":
     x = input(" ")
 
     if x == "admin":
-        USER.loading() 
-        while(True):
+        USER.loading()
+        while (True):
             os.system("clear")
-            
+
             ADMIN.menu()
 
             while True:
                 user_option = input("Masukan opsi: ")
-                if user_option in ["1","2","3","4","5"] :
+                if user_option in ["1", "2", "3", "4", "5"]:
                     break
                 else:
                     print("Pilihan Tidak Valid")
 
-            ADMIN.opsi_n_DB(user_option)            
+            ADMIN.opsi_n_DB(user_option)
 
-            is_done = input("\nApakah Selesai (y/n)? ")
-            if is_done == "y" or is_done == "Y":
+            if user_option == "y" or user == "Y":
                 break
-        
 
     else:
         while True:
