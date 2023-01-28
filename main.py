@@ -23,9 +23,6 @@ if __name__ == "__main__":
 
             ADMIN.opsi_n_DB(user_option)
 
-            if user_option == "y" or user == "Y":
-                break
-
     else:
         while True:
             USER.loading()

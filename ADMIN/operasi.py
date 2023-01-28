@@ -96,12 +96,8 @@ def data_sort(**pilihan):
     try:
         with open(f"/home/agung/Documents/tugas kuliah/alpro/program tiket pesawat /{pilihan['nama_file']}.txt", "r+", encoding="utf-8") as file:
             data = file.readlines()
-            if pilihan['nama_file'] == "datapemesan":
-                sorting = sorted(
-                    data, key=lambda content: content[2], reverse=True)
-            else:
-                sorting = sorted(
-                    data, key=lambda content: content[2])
+            data_tuple = [tuple(line.strip().split(',')) for line in data]
+            sorting = sorted(data_tuple, key=lambda content:content[2])
             return sorting
     except:
         return False

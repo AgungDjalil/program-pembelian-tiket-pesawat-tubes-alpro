@@ -9,8 +9,8 @@ def read_console(pilih):
     data_file = operasi.read(pilihan)
 
     match pilih:
-        case "pemesan": pemesan_data(data_file)
-        case "penumpang": penumpang_data(data_file)
+        case "pemesan": pemesan_data(read_biasa=data_file)
+        case "penumpang": penumpang_data(read_biasa=data_file)
 
 
 def search_console(pilih):
@@ -45,6 +45,8 @@ def search_console(pilih):
         tujuan = data[6]
         view_data_penumpang(title, nama, tujuan, waktu, maskapai, tanggal)
 
+    x = input("")
+
 
 def update_console(pilih):
     operasi.loading()
@@ -74,7 +76,7 @@ def sort_console(pilih):
     while (True):
         data = operasi.data_sort(nama_file=pilihan)
         match pilih:
-            case "pemesan": pemesan_data(data)
+            case "pemesan": pemesan_data(sorting=data)
             case "penumpang": penumpang_data(data)
 
         usr_options = input("Apakah Selesai (y/t)\t: ".lower())
@@ -110,37 +112,45 @@ def delete_console(pilih):
             case "penumpang": operasi.delete_penumpang(pk)
 
 
-def pemesan_data(data_file):
-    # header
-    no = "NO"
-    tanggal = "TANGGAL"
-    nama = "NAMA"
-    nomor = "NOMOR TELP"
-    email = "EMAIL"
-    tagihan = "TAGIHAN"
+def pemesan_data(**data_file):
+    if "read_biasa" in data_file: 
+        os.system("clear")
+        # header
+        no = "NO"
+        tanggal = "TANGGAL"
+        nama = "NAMA"
+        nomor = "NOMOR TELP"
+        email = "EMAIL"
+        tagihan = "TAGIHAN"
 
-    print("="*70)
-    print(f"{no:3} | {tanggal:15} | {nama:20} | {nomor:10} | {tagihan:.10}")
-    print("-"*70)
+        print("="*72)
+        print(f"{no:3} | {tanggal:10} | {nama:20} | {nomor:10} | {tagihan:15} |")
+        print("-"*72)
 
-    # content
-    for index, data in enumerate(data_file):
-        data_break = data.split(",")
-        pk = data_break[0]
-        tanggal = data_break[1]
-        nama = data_break[2]
-        nomor = data_break[3]
-        email = data_break[2]
-        maskapai = data_break[5]
-        tagihan = data_break[6]
-        print(
-            f"{index+1:3} | {tanggal:.15} | {nama:.20} | {nomor:.10} | {tagihan:.10}\n")
+        # content
+        data_file = data_file["read_biasa"]
+        for index, data in enumerate(data_file):
+            data_break = data.split(",")
+            pk = data_break[0]
+            tanggal = data_break[1]
+            nama = data_break[2]
+            nomor = data_break[3]
+            email = data_break[2]
+            maskapai = data_break[5]
+            tagihan = data_break[6]
+            print(
+                f"{index+1:3} | {tanggal:.10} | {nama:.20} | {nomor:.10} | {tagihan:.15} |")
 
-    # footer
-    print("="*72)
+        # footer
+        print("="*72)
+
+
+
+    x = input("")
 
 
 def penumpang_data(data_file):
+    os.system("clear")
     # Header
     no = "NO"
     nama = "NAMA"
@@ -148,9 +158,9 @@ def penumpang_data(data_file):
     tanggal = "TANGGAL"
     maskapai = "MASKAPAI"
 
-    print("="*70)
-    print(f"{no:2} | {nama:10} | {waktu:10} | {tanggal:10} | {maskapai:10}")
-    print("-"*70)
+    print("="*71)
+    print(f"{no:2} | {nama:20} | {waktu:15} | {tanggal:10} | {maskapai:10} |")
+    print("-"*71)
 
     # Content
     for index, data in enumerate(data_file):
@@ -162,18 +172,20 @@ def penumpang_data(data_file):
         maskapai = data_break[5]
         nama = " ".join([title, nama])
         print(
-            f"{index+1:3} | {nama:.15} | {waktu:.10} | {tanggal:.10} | {maskapai:.10}\n")
+            f"{index+1:2} | {nama:.20} | {waktu:.15} | {tanggal:.10} | {maskapai:.10} |")
 
     # Footer
-    print("="*56)
+    print("="*71)
+
+    x = input("")
 
 
 def view_data_pemesan(nama, no_telp, email, maskapai, tagihan):
-    nama = nama.replace(" ", "")
-    no_telp = no_telp.replace(" ", "")
-    email = email.replace(" ", "")
-    maskapai = maskapai.replace(" ", "")
-    tagihan = tagihan.replace(" ", "")
+    nama = nama.strip()
+    no_telp = no_telp.strip()
+    email = email.strip()
+    maskapai = maskapai.strip()
+    tagihan = tagihan.strip().replace("\n", "")
 
     os.system("clear")
     print("="*40)
@@ -188,12 +200,12 @@ def view_data_pemesan(nama, no_telp, email, maskapai, tagihan):
 
 
 def view_data_penumpang(title, nama, tujuan, waktu, maskapai, tanggal):
-    title = title.replace(" ", "")
-    nama = nama.replace(" ", "")
-    tujuan = tujuan.replace(" ", "")
-    waktu = waktu.replace(" ", "")
-    maskapai = maskapai.replace(" ", "")
-    tanggal = tanggal.replace(" ", "")
+    title = title.strip()
+    nama = nama.strip()
+    tujuan = tujuan.strip().replace("\n", "")
+    waktu = waktu.strip()
+    maskapai = maskapai.strip()
+    tanggal = tanggal.strip()
 
     os.system("clear")
     print("="*40)
@@ -227,14 +239,7 @@ def update_pemesan(data):
         case "2": no_telp = input("Masukkan No.Telp\t: ")
         case "3": email = input("Masukkan Email\t: ")
 
-    os.system("clear")
-    print("="*40)
-    print("DATA BARU ANDA".center(39))
-    print("="*40+"\n")
-    print(f"Nama    : {nama}\n")
-    print(f"No.Telp : {no_telp}\n")
-    print(f"Email   : {email}\n")
-    print("="*40)
+    view_data_pemesan(nama, no_telp, email, maskapai, tagihan)
 
     operasi.update_pemesan(pk, tgl_booking, nama,
                            no_telp, email, maskapai, tagihan)
@@ -261,14 +266,7 @@ def update_penumpang(data):
         case "2": nama = input("Masukkan Nama\t: ")
         case "3": waktu = input("Masukkan Waktu\t: ")
 
-    os.system("clear")
-    print("="*40)
-    print("DATA BARU ANDA".center(39))
-    print("="*40+"\n")
-    print(f"Title   : {title}\n")
-    print(f"Nama    : {nama}\n")
-    print(f"Waktu   : {waktu}\n")
-    print("="*40)
+    view_data_penumpang(title, nama, jurusan, waktu, maskapai, tanggal)
 
     operasi.update_penumpang(pk, title, nama, waktu,
                              tanggal, maskapai, jurusan)
