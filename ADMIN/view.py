@@ -72,16 +72,11 @@ def sort_console(pilih):
     pilih.lower()
     pilihan = "".join(["data", pilih])
     print("")
-
-    while (True):
-        data = operasi.data_sort(nama_file=pilihan)
-        match pilih:
-            case "pemesan": pemesan_data(sorting=data)
-            case "penumpang": penumpang_data(data)
-
-        usr_options = input("Apakah Selesai (y/t)\t: ".lower())
-        if usr_options == "y":
-            break
+    
+    data = operasi.data_sort(nama_file=pilihan)
+    match pilih:
+        case "pemesan": pemesan_data(sorting=data)
+        case "penumpang": penumpang_data(sorting=data)
 
 
 def delete_console(pilih):
@@ -144,38 +139,97 @@ def pemesan_data(**data_file):
         # footer
         print("="*72)
 
+    else:
+        os.system("clear")
+        # header
+        no = "NO"
+        tanggal = "TANGGAL"
+        nama = "NAMA"
+        nomor = "NOMOR TELP"
+        email = "EMAIL"
+        tagihan = "TAGIHAN"
+
+        print("="*72)
+        print(f"{no:3} | {tanggal:10} | {nama:20} | {nomor:10} | {tagihan:15} |")
+        print("-"*72)
+
+        # content
+        data_file = data_file["sorting"]
+        for index, data in enumerate(data_file):
+            pk = data[0]
+            tanggal = data[1]
+            nama = data[2]
+            nomor = data[3]
+            email = data[2]
+            maskapai = data[5]
+            tagihan = data[6]
+            print(
+                f"{index+1:3} | {tanggal:.10} | {nama:.20} | {nomor:.10} | {tagihan:.15} |")
+
+        # footer
+        print("="*72)
+        
 
 
     x = input("")
 
 
-def penumpang_data(data_file):
-    os.system("clear")
-    # Header
-    no = "NO"
-    nama = "NAMA"
-    waktu = "WAKTU"
-    tanggal = "TANGGAL"
-    maskapai = "MASKAPAI"
+def penumpang_data(**data_file):
+    if "read_biasa" in data_file:
+        os.system("clear")
+        # Header
+        no = "NO"
+        nama = "NAMA"
+        waktu = "WAKTU"
+        tanggal = "TANGGAL"
+        maskapai = "MASKAPAI"
 
-    print("="*71)
-    print(f"{no:2} | {nama:20} | {waktu:15} | {tanggal:10} | {maskapai:10} |")
-    print("-"*71)
+        print("="*71)
+        print(f"{no:2} | {nama:20} | {waktu:15} | {tanggal:10} | {maskapai:10} |")
+        print("-"*71)
 
-    # Content
-    for index, data in enumerate(data_file):
-        data_break = data.split(",")
-        title = data_break[1]
-        nama = data_break[2]
-        waktu = data_break[3]
-        tanggal = data_break[4]
-        maskapai = data_break[5]
-        nama = " ".join([title, nama])
-        print(
-            f"{index+1:2} | {nama:.20} | {waktu:.15} | {tanggal:.10} | {maskapai:.10} |")
+        # Content
+        data_file = data_file["read_biasa"]
+        for index, data in enumerate(data_file):
+            data_break = data.split(",")
+            title = data_break[1]
+            nama = data_break[2]
+            waktu = data_break[3]
+            tanggal = data_break[4]
+            maskapai = data_break[5]
+            nama = " ".join([title, nama])
+            print(
+                f"{index+1:2} | {nama:.20} | {waktu:.15} | {tanggal:.10} | {maskapai:.10} |")
 
-    # Footer
-    print("="*71)
+        # Footer
+        print("="*71)
+    else:
+        os.system("clear")
+        # Header
+        no = "NO"
+        nama = "NAMA"
+        waktu = "WAKTU"
+        tanggal = "TANGGAL"
+        maskapai = "MASKAPAI"
+
+        print("="*71)
+        print(f"{no:2} | {nama:20} | {waktu:15} | {tanggal:10} | {maskapai:10} |")
+        print("-"*71)
+
+        # Content
+        data_file = data_file["sorting"]
+        for index, data in enumerate(data_file):
+            title = data[1]
+            nama = data[2]
+            waktu = data[3]
+            tanggal = data[4]
+            maskapai = data[5]
+            nama = " ".join([title, nama])
+            print(
+                f"{index+1:2} | {nama:.20} | {waktu:.15} | {tanggal:.10} | {maskapai:.10} |")
+
+        # Footer
+        print("="*71)
 
     x = input("")
 
