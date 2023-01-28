@@ -1,5 +1,11 @@
+import os,sys 
+
 DB_PEMESAN = "datapemesan.txt"
 DB_PENUMPANG = "datapenumpang.txt"
+
+os.getcwd()
+new_dir = os.getcwd()
+PATH =  new_dir
 
 TEMPLATE_DATA_PEMESAN = {
     "pk": "xxxxxxxxxx",

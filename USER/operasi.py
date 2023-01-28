@@ -1,15 +1,19 @@
-from . import database
+# from . import database
 from .util import random_string
 from time import time
 import time
-import os
+import os,sys
 from . import inputan
+
+new_dir = os.getcwd() + "/ADMIN"
+sys.path.append(new_dir)
+import database
 
 
 def read(kota):
 
     try:
-        with open(f'/home/agung/Documents/tugas kuliah/alpro/program tiket pesawat /jadwal/{kota}.csv', 'r') as file:
+        with open(database.PATH + f'/jadwal/{kota}.csv', 'r') as file:
             content = file.readlines()
             jumlah_buku = len(content)
             return content
@@ -21,7 +25,7 @@ def read(kota):
 def read_plane(**kwargs):
 
     try:
-        with open(f'/home/agung/Documents/tugas kuliah/alpro/program tiket pesawat /jadwal/{kota}.csv', 'r') as file:
+        with open(database.PATH + f'/jadwal/{kota}.csv', 'r') as file:
             content = file.readlines()
             jumlah_data = len(content)
             if "no_pesawat" in kwargs:

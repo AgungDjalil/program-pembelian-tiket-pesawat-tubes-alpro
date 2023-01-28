@@ -5,7 +5,7 @@ import time
 
 def read(pilihan):
     try:
-        with open(f"/home/agung/Documents/tugas kuliah/alpro/program tiket pesawat /{pilihan}.txt", 'r') as file:
+        with open(database.PATH + f"/{pilihan}.txt", 'r') as file:
             content = file.readlines()
             return content
     except:
@@ -14,7 +14,7 @@ def read(pilihan):
 
 def search(no_pk, pilihan):
     try:
-        with open(f"/home/agung/Documents/tugas kuliah/alpro/program tiket pesawat /{pilihan}.txt", 'r') as file:
+        with open(database.PATH + f"/{pilihan}.txt", 'r') as file:
             content = file.readlines()
             jmlh_data = len(content)
             for index in range(jmlh_data):
@@ -94,7 +94,7 @@ def update_penumpang(pk, title, nama, waktu, tanggal, maskapai, jurusan):
 
 def data_sort(**pilihan):
     try:
-        with open(f"/home/agung/Documents/tugas kuliah/alpro/program tiket pesawat /{pilihan['nama_file']}.txt", "r+", encoding="utf-8") as file:
+        with open(database.PATH + f"/{pilihan['nama_file']}.txt", "r+", encoding="utf-8") as file:
             data = file.readlines()
             data_tuple = [tuple(line.split(',')) for line in data]
             sorting = sorted(data_tuple, key=lambda content:content[2])
