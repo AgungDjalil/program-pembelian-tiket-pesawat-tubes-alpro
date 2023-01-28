@@ -18,6 +18,8 @@ if __name__ == "__main__":
                 user_option = input("Masukan opsi: ")
                 if user_option in ["1", "2", "3", "4", "5"]:
                     break
+                elif user_option == "6":
+                    exit()
                 else:
                     print("Pilihan Tidak Valid")
 

@@ -284,17 +284,23 @@ def update_pemesan(data):
     view_data_pemesan(nama, no_telp, email, maskapai, tagihan)
 
     print("\nOption\n1. nama\n2. No_telp\n3. email\n")
-    user_option = input("Pilih Data Yang Ingin Diubah[1,2,3]\t: ")
+    while True:
+        user_option = input("Pilih Data Yang Ingin Diubah[1,2,3]\t: ")
+        if user_option in ["1","2","3"]:
+            match user_option:
+                case "1": nama = input("Masukkan Nama\t: ").title()
+                case "2": no_telp = input("Masukkan No.Telp\t: ")
+                case "3": email = input("Masukkan Email\t: ")
 
-    match user_option:
-        case "1": nama = input("Masukkan Nama\t: ").title()
-        case "2": no_telp = input("Masukkan No.Telp\t: ")
-        case "3": email = input("Masukkan Email\t: ")
+            view_data_pemesan(nama, no_telp, email, maskapai, tagihan)
 
-    view_data_pemesan(nama, no_telp, email, maskapai, tagihan)
+            operasi.update_pemesan(pk, tgl_booking, nama,
+                                no_telp, email, maskapai, tagihan)
+            break
 
-    operasi.update_pemesan(pk, tgl_booking, nama,
-                           no_telp, email, maskapai, tagihan)
+        else:
+            print("Pilihan Anda Tidak Valid")
+            
     x = input("")
 
 
@@ -310,16 +316,23 @@ def update_penumpang(data):
     view_data_penumpang(title, nama, jurusan, waktu, maskapai, tanggal)
 
     print("\nOption\n1. Title\n2. nama\n3. No_telp\n4. email\n")
-    user_option = input("Pilih Data Yang Ingin Diubah[1,2,3,4]\t: ")
-    print("")
+    while True:
+        user_option = input("Pilih Data Yang Ingin Diubah[1,2,3,4]\t: ")
+        if user_option in ["1", "2", "3", "4"]:
+            print("")
 
-    match user_option:
-        case "1": title = input("Masukkan Title\t: ").title()
-        case "2": nama = input("Masukkan Nama\t: ").title()
-        case "3": waktu = input("Masukkan Waktu\t: ")
+            match user_option:
+                case "1": title = input("Masukkan Title\t: ").title()
+                case "2": nama = input("Masukkan Nama\t: ").title()
+                case "3": waktu = input("Masukkan Waktu\t: ")
 
-    view_data_penumpang(title, nama, jurusan, waktu, maskapai, tanggal)
+            view_data_penumpang(title, nama, jurusan, waktu, maskapai, tanggal)
 
-    operasi.update_penumpang(pk, title, nama, waktu,
-                             tanggal, maskapai, jurusan)
+            operasi.update_penumpang(pk, title, nama, waktu,
+                                    tanggal, maskapai, jurusan)
+            break
+
+        else:
+            print("Pilihan Anda Tidak Valid")
+
     x = input("")

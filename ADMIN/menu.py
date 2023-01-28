@@ -10,7 +10,8 @@ def menu():
     print("2. Search Data")
     print("3. Update Data")
     print("4. Sort Data")
-    print("5. Delete Data\n")
+    print("5. Delete Data")
+    print("6. Keluar")
 
 
 def opsi_n_DB(user_option):
