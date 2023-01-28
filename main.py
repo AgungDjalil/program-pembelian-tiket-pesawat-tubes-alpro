@@ -4,39 +4,36 @@ import ADMIN as ADMIN
 
 
 if __name__ == "__main__":
-    os.system("clear")
-    x = input(" ")
 
-    if x == "admin":
-        USER.loading()
-        while (True):
-            os.system("clear")
+    while True:
+        os.system("clear")
+        print("Selamat Datang Di Program".center(90))
+        x = input(" ")
 
-            ADMIN.menu()
-
+        if x == "admin":
             while True:
+                ADMIN.menu()
                 user_option = input("Masukan opsi: ")
                 if user_option in ["1", "2", "3", "4", "5"]:
-                    break
+                    ADMIN.opsi_n_DB(user_option)
                 elif user_option == "6":
-                    exit()
+                    break
                 else:
                     print("Pilihan Tidak Valid")
 
-            ADMIN.opsi_n_DB(user_option)
 
-    else:
-        while True:
-            USER.loading()
+        else:
+            while True:
+                USER.loading()
 
-            print("==================================".center(66))
-            print(" TRAVELOKE 🛫 BOOK FLIGHT TICKET ".center(66))
-            print("==================================".center(66))
-            print("")
+                print("==================================".center(66))
+                print(" TRAVELOKE 🛫 BOOK FLIGHT TICKET ".center(66))
+                print("==================================".center(66))
+                print("")
 
-            USER.kota()
-            USER.buat_data()
+                USER.kota()
+                USER.buat_data()
 
-            inputuser = input("\n\nKembali Ke Menu? (y/n)")
-            if inputuser == "n":
-                break
+                inputuser = input("\n\nKembali Ke Menu? (y/n)")
+                if inputuser == "n":
+                    break

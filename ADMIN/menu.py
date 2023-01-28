@@ -1,7 +1,9 @@
+import os
 from . import view
 
 
 def menu():
+    os.system("clear")
     print("SELAMAT DATANG DI PROGRAM".center(66))
     print("DATABASE BOOKING PESAWAT".center(66))
     print("=========================".center(66))
