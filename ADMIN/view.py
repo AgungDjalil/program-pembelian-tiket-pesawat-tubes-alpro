@@ -72,7 +72,7 @@ def sort_console(pilih):
     pilih.lower()
     pilihan = "".join(["data", pilih])
     print("")
-    
+
     data = operasi.data_sort(nama_file=pilihan)
     match pilih:
         case "pemesan": pemesan_data(sorting=data)
@@ -169,8 +169,6 @@ def pemesan_data(**data_file):
         # footer
         print("="*72)
         
-
-
     x = input("")
 
 
@@ -289,7 +287,7 @@ def update_pemesan(data):
     user_option = input("Pilih Data Yang Ingin Diubah[1,2,3]\t: ")
 
     match user_option:
-        case "1": nama = input("Masukkan Nama\t: ")
+        case "1": nama = input("Masukkan Nama\t: ").title()
         case "2": no_telp = input("Masukkan No.Telp\t: ")
         case "3": email = input("Masukkan Email\t: ")
 
@@ -316,8 +314,8 @@ def update_penumpang(data):
     print("")
 
     match user_option:
-        case "1": title = input("Masukkan Title\t: ")
-        case "2": nama = input("Masukkan Nama\t: ")
+        case "1": title = input("Masukkan Title\t: ").title()
+        case "2": nama = input("Masukkan Nama\t: ").title()
         case "3": waktu = input("Masukkan Waktu\t: ")
 
     view_data_penumpang(title, nama, jurusan, waktu, maskapai, tanggal)

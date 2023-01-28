@@ -160,7 +160,7 @@ def data_pemesan():
 def title():
     while True:
         title = input("◾ Title (Mr/Ms)           : ").title()
-        if title not in ['Mr', 'Mrs', 'Ms']:
+        if title not in ['Mr','Ms']:
             print("Pilihan Tidak Valid")
         elif title == "":
             print("Masukkan title")
